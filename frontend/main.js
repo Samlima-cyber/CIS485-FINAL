@@ -63,4 +63,4 @@ page('/create-exercise', () => {
 });
 
 // 🧠 Enable hashbang mode so routing works on GitHub Pages and Live Server
-page();
+page({ hashbang: true });
