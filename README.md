@@ -5,6 +5,7 @@
 **Instructor:** Mattew Conroy  
 
 ---
+⚠️ Note: After clicking a tab, please refresh the page if the content doesn’t appear. This is due to client-side routing in a single-page application.
 
 ## 🚀 What This App Does
 
