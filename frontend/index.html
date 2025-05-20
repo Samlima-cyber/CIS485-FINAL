@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kumite Buddy</title>
+  <script type="module" src="./main.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+  
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background: #222;
+      padding: 1rem;
+    }
+  
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  
+    nav a:hover {
+      text-decoration: underline;
+    }
+  
+    /* ✅ Add this rule to highlight the active nav link */
+    nav a.active {
+      color: yellow;
+      text-decoration: underline;
+    }
+  
+    #app {
+      padding: 1rem;
+    }
+  </style>  
+</head>
+<body>
+
+  <!-- 🔗 Navigation bar for hashbang routing -->
+  <nav id="navbar">
+    <a href="#!/" data-route="/">Login</a>
+    <a href="#!/register" data-route="/register">Register</a>
+    <a href="#!/sessions" data-route="/sessions">Sessions</a>
+    <a href="#!/create-session" data-route="/create-session">Create Session</a>
+    <a href="#!/exercises" data-route="/exercises">Exercises</a>
+    <a href="#!/create-exercise" data-route="/create-exercise">Create Exercise</a>
+  </nav>
+  
+
+  <!-- 🔧 Lit components will render inside here -->
+  <div id="app"></div>
+
+</body>
+</html>
