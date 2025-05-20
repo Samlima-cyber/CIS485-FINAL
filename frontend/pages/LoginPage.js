@@ -1,4 +1,6 @@
+// frontend/pages/LoginPage.js
 import { LitElement, html, css } from 'https://unpkg.com/lit@2.8.0/index.js?module';
+import page from 'https://unpkg.com/page/page.mjs';
 
 class LoginPage extends LitElement {
   static styles = css`
@@ -6,42 +8,37 @@ class LoginPage extends LitElement {
       display: block;
       padding: 2rem;
       font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      min-height: 100vh;
-    }
-    h2 {
-      text-align: center;
-      color: #333;
     }
     form {
       max-width: 400px;
       margin: auto;
-      background: #fff;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      background: #f5f5f5;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     input, button {
-      padding: 0.75rem;
+      padding: 0.5rem;
       font-size: 1rem;
-      border: 1px solid #ccc;
       border-radius: 4px;
+      border: 1px solid #ccc;
     }
     button {
-      background-color: #007bff;
+      background: black;
       color: white;
-      border: none;
       cursor: pointer;
+      font-weight: bold;
     }
-    button:hover {
-      background-color: #0056b3;
+    .error {
+      color: red;
+      font-weight: bold;
     }
-    .logout {
-      text-align: center;
-      margin-top: 2rem;
+    .success {
+      color: green;
+      font-weight: bold;
     }
   `;
 
@@ -49,7 +46,7 @@ class LoginPage extends LitElement {
     email: { type: String },
     password: { type: String },
     error: { type: String },
-    token: { type: String }
+    success: { type: Boolean }
   };
 
   constructor() {
@@ -57,12 +54,13 @@ class LoginPage extends LitElement {
     this.email = '';
     this.password = '';
     this.error = '';
-    this.token = localStorage.getItem('token') || '';
+    this.success = false;
   }
 
   async handleLogin(e) {
     e.preventDefault();
     this.error = '';
+    this.success = false;
 
     try {
       const res = await fetch('http://localhost:5050/api/users/login', {
@@ -70,38 +68,22 @@ class LoginPage extends LitElement {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: this.email, password: this.password })
       });
+
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
 
       localStorage.setItem('token', data.token);
-      this.token = data.token;
-      console.log("✅ Login successful, token saved:", data.token);
-      window.location.hash = '#!/sessions';
+      this.success = true;
+
+      setTimeout(() => page('/sessions'), 1200);
     } catch (err) {
       this.error = err.message;
     }
   }
 
-  handleLogout() {
-    localStorage.removeItem('token');
-    this.token = '';
-    this.email = '';
-    this.password = '';
-    window.location.hash = '#!/';
-  }
-
   render() {
-    if (this.token) {
-      return html`
-        <div class="logout">
-          <p>You are already logged in.</p>
-          <button @click=${this.handleLogout}>🚪 Log Out</button>
-        </div>
-      `;
-    }
-
     return html`
-      <h2>Login</h2>
+      <h2 style="text-align: center;">Login</h2>
       <form @submit=${this.handleLogin}>
         <input
           type="email"
@@ -118,11 +100,11 @@ class LoginPage extends LitElement {
           required
         />
         <button type="submit">Log In</button>
-        ${this.error ? html`<p style="color: red;">${this.error}</p>` : ''}
+        ${this.error ? html`<p class="error">${this.error}</p>` : ''}
+        ${this.success ? html`<p class="success">✅ Logged in! Redirecting...</p>` : ''}
       </form>
     `;
   }
 }
 
-console.log("🧭 LoginPage mounted");
 customElements.define('login-page', LoginPage);

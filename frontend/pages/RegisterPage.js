@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'https://unpkg.com/lit@2.8.0/index.js?module';
+import page from 'https://unpkg.com/page/page.mjs';
 
 class RegisterPage extends LitElement {
   static styles = css`
@@ -6,43 +7,45 @@ class RegisterPage extends LitElement {
       display: block;
       padding: 2rem;
       font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      min-height: 100vh;
+      background: #f5f5f5;
     }
     form {
       max-width: 400px;
       margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
     }
     input, button {
       padding: 0.6rem;
       font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
     }
     button {
-      background-color: #007bff;
+      background: #007bff;
       color: white;
-      font-weight: bold;
+      border: none;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background 0.3s ease;
     }
     button:hover {
-      background-color: #0056b3;
+      background: #0056b3;
+    }
+    .message {
+      text-align: center;
+      font-size: 0.95rem;
     }
     .success {
       color: green;
-      text-align: center;
     }
     .error {
       color: red;
-      text-align: center;
     }
   `;
 
@@ -69,7 +72,7 @@ class RegisterPage extends LitElement {
     this.success = false;
 
     try {
-      const res = await fetch('http://localhost:5050/api/users/register', {
+      const res = await fetch('https://kumite-backend.onrender.com/api/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -83,9 +86,7 @@ class RegisterPage extends LitElement {
       if (!res.ok) throw new Error(data.message);
 
       this.success = true;
-      setTimeout(() => {
-        window.location.href = '/login';
-      }, 1500); // Redirect to login after success
+      setTimeout(() => page('/'), 1200); // ✅ Redirect to login page
     } catch (err) {
       this.error = err.message;
     }
@@ -94,7 +95,8 @@ class RegisterPage extends LitElement {
   render() {
     return html`
       <form @submit=${this.handleRegister}>
-        <h2 style="text-align: center;">Register</h2>
+        <h2>Register</h2>
+
         <input
           type="text"
           placeholder="Username"
@@ -102,6 +104,7 @@ class RegisterPage extends LitElement {
           @input=${e => this.username = e.target.value}
           required
         />
+
         <input
           type="email"
           placeholder="Email"
@@ -109,6 +112,7 @@ class RegisterPage extends LitElement {
           @input=${e => this.email = e.target.value}
           required
         />
+
         <input
           type="password"
           placeholder="Password"
@@ -116,10 +120,11 @@ class RegisterPage extends LitElement {
           @input=${e => this.password = e.target.value}
           required
         />
+
         <button type="submit">Register</button>
 
-        ${this.error ? html`<p class="error">${this.error}</p>` : ''}
-        ${this.success ? html`<p class="success">✅ Registration successful! Redirecting...</p>` : ''}
+        ${this.error ? html`<p class="message error">❌ ${this.error}</p>` : ''}
+        ${this.success ? html`<p class="message success">✅ Registered! Redirecting...</p>` : ''}
       </form>
     `;
   }
