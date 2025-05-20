@@ -1,5 +1,11 @@
 {
-  "dependencies": {
-    "mongodb": "^6.16.0"
+  "name": "kumite-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Kumite Buddy project",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "devDependencies": {
+    "lite-server": "^2.6.1"
   }
 }
