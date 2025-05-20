@@ -1,0 +1,7 @@
+{
+    "server": {
+      "baseDir": "frontend",
+      "index": "index.html"
+    },
+    "port": 5500
+  }  
