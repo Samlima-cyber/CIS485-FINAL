@@ -1,28 +1,77 @@
-🥋 Kumite Buddy — Final Project
-Author: Sam Lima
-Course: CIS 485 - Web Development II
-Instructor: [Mattew Conroy]
-Submission Date: May 19, 2025
-🚀 What This App Does
-Kumite Buddy is a web application that helps martial artists:
+# 🥋 Kumite Buddy — Final Project
 
-🥊 Find and schedule sparring sessions
+**Author:** Sam Lima  
+**Course:** CIS 485 - Web Development II  
+**Instructor:** Matthew Conroy  
+**Submission Date:** May 19, 2025  
 
-💪 Create and browse training exercises
+---
 
-🔐 Register/login securely
+## 🚀 What This App Does
 
-🗑️ Delete sessions/exercises if needed
+Kumite Buddy is a full-stack martial arts training platform built for sparring enthusiasts. It allows users to:
 
-🛠️ Tech Stack
-Frontend: Lit (Web Components)
+- 🥊 Find and schedule sparring sessions
+- 💪 Create and browse training exercises
+- 🔐 Register/login securely
+- 🗑️ Delete sessions/exercises when needed
 
-Backend: Node.js + Express
+---
 
-Database: MongoDB Atlas
+## 🛠️ Tech Stack
 
-Authentication: JWT Token-Based
+| Layer       | Tools/Tech                            |
+|-------------|----------------------------------------|
+| Frontend    | Lit (Web Components), Vanilla JS       |
+| Backend     | Node.js, Express                       |
+| Database    | MongoDB Atlas                          |
+| Auth        | JSON Web Tokens (JWT)                  |
+| Deployment  | Render (backend) + Netlify or Local (frontend) |
+| CI/CD       | GitHub integrated auto-deploy          |
 
-Deployment: Render (backend) + Netlify (frontend)
+---
 
-CI/CD: GitHub + Netlify/Render auto-deploy
+## 📁 Project Structure
+kumite-buddy/
+├── backend/
+│ ├── controllers/
+│ ├── middleware/
+│ ├── models/
+│ ├── routes/
+│ ├── server.js
+│ ├── package.json
+│ └── .env
+│
+├── frontend/
+│ ├── index.html
+│ ├── main.js
+│ ├── pages/
+│ ├── package.json
+│ └── bs-config.json
+
+---
+
+## 💻 How to Run Locally
+
+### ⚙️ Backend Setup
+
+1. Open a terminal and go to the backend folder:
+
+   ```bash
+   cd backend
+   npm install
+Create a .env file using this structure:
+PORT=5050
+MONGO_URI=your-mongodb-connection-string
+JWT_SECRET=your-secret-key
+
+Start the backend server:
+npm run dev
+
+🖥️ Frontend Setup
+Open another terminal and go to the frontend folder:
+cd frontend
+npm install
+npm start
+Open your browser and visit:
+http://localhost:3000
