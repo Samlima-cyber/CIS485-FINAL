@@ -12,6 +12,11 @@ import './pages/CreateExerciseForm.js';
 
 const app = document.getElementById('app');
 
+// 🔹 Update the content of the app
+function renderComponent(tagName) {
+  app.replaceChildren(document.createElement(tagName));
+}
+
 // 🔹 Add this function to highlight active nav link
 function highlightActive(path) {
   const links = document.querySelectorAll('nav a');
@@ -20,42 +25,42 @@ function highlightActive(path) {
   });
 }
 
-// 🔹 Define routes and call highlightActive after each render
+// 🔹 Route definitions
 page('/', () => {
   console.log("📍 ROUTE: /");
-  render(html`<login-page></login-page>`, app);
+  renderComponent('login-page');
   highlightActive('/');
 });
 
 page('/register', () => {
   console.log("📍 ROUTE: /register");
-  render(html`<register-page></register-page>`, app);
+  renderComponent('register-page');
   highlightActive('/register');
 });
 
 page('/sessions', () => {
   console.log("📍 ROUTE: /sessions");
-  render(html`<session-list></session-list>`, app);
+  renderComponent('session-list');
   highlightActive('/sessions');
 });
 
 page('/create-session', () => {
   console.log("📍 ROUTE: /create-session");
-  render(html`<create-session></create-session>`, app);
+  renderComponent('create-session-form');
   highlightActive('/create-session');
 });
 
 page('/exercises', () => {
   console.log("📍 ROUTE: /exercises");
-  render(html`<exercise-list></exercise-list>`, app);
+  renderComponent('exercise-list');
   highlightActive('/exercises');
 });
 
 page('/create-exercise', () => {
-    console.log("📍 ROUTE: /create-exercise");
-    render(html`<create-exercise></create-exercise>`, app);
-    highlightActive('/create-exercise');
-  });
-  
-// 🧠 Start routing with hashbang mode (important for local/live server)
+  console.log("📍 ROUTE: /create-exercise");
+  renderComponent('create-exercise-form');
+  highlightActive('/create-exercise');
+});
+
+// 🧠 Enable hashbang mode so routing works on GitHub Pages and Live Server
 page({ hashbang: true });
