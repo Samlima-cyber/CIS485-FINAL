@@ -51,10 +51,20 @@ kumite-buddy/
 
 ---
 
+## 🌍 Live Demo
+
+- **Frontend:** [kumite-frontend.netlify.app](https://kumite-frontend.netlify.app/)  
+- **Backend:** [kumite-backend.onrender.com](https://kumite-backend.onrender.com/)
+
+---
+
 ## 💻 How to Run Locally
 
 ### ⚙️ Backend Setup
-
+### 1. Clone the repo:
+```bash
+git clone https://github.com/Samlima-cyber/CIS485-FINAL.git
+cd CIS485-FINAL
 1. Open a terminal and go to the backend folder:
 
    ```bash
